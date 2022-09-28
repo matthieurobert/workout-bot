@@ -32,25 +32,29 @@ func init() {
 
 var (
 	commands = []*discordgo.ApplicationCommand{
-		co.BasicCommand,
-		co.BasicCommandWithFiles,
-		co.PermissionOverview,
-		co.LocalizedCommand,
-		co.Options,
-		co.Subcommands,
-		co.Responses,
-		co.Followups,
+		// co.BasicCommand,
+		// co.BasicCommandWithFiles,
+		// co.PermissionOverview,
+		// co.LocalizedCommand,
+		// co.Options,
+		// co.Subcommands,
+		// co.Responses,
+		// co.Followups,
+		co.Exercice,
+		// co.Time,
 	}
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"basic-command":            co.BasicCommandHandler,
-		"basic-command-with-files": co.BasicCommandWithFilesHandler,
-		"localized-command":        co.LocalizedCommandHandler,
-		"options":                  co.OptionsHandler,
-		"permission-overview":      co.PermissionOverviewHandler,
-		"subcommands":              co.SubcommandsHandler,
-		"responses":                co.ResponsesHandler,
-		"followups":                co.FollowupsHandler,
+		// "basic-command":            co.BasicCommandHandler,
+		// "basic-command-with-files": co.BasicCommandWithFilesHandler,
+		// "localized-command":        co.LocalizedCommandHandler,
+		// "options":                  co.OptionsHandler,
+		// "permission-overview":      co.PermissionOverviewHandler,
+		// "subcommands":              co.SubcommandsHandler,
+		// "responses":                co.ResponsesHandler,
+		// "followups":                co.FollowupsHandler,
+		"exercice": co.ExerciceHandler,
+		// "time":     co.TimeHandlers,
 	}
 )
 
