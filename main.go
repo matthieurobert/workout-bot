@@ -41,7 +41,7 @@ var (
 		// co.Responses,
 		// co.Followups,
 		co.Exercice,
-		// co.Time,
+		co.Time,
 	}
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
@@ -54,7 +54,7 @@ var (
 		// "responses":                co.ResponsesHandler,
 		// "followups":                co.FollowupsHandler,
 		"exercice": co.ExerciceHandler,
-		// "time":     co.TimeHandlers,
+		"time":     co.TimeHandlers,
 	}
 )
 
