@@ -9,6 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 
 	co "github.com/matthieurobert/workout-bot/commands"
+	"github.com/matthieurobert/workout-bot/config"
 )
 
 // Bot parameters
@@ -67,6 +68,8 @@ func init() {
 }
 
 func main() {
+	config.InitConfig()
+
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
 	})
