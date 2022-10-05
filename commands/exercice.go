@@ -22,6 +22,16 @@ var Exercice = &discordgo.ApplicationCommand{
 			Name:        "name",
 			Description: "Name of the exercice",
 			Required:    true,
+			Choices: []*discordgo.ApplicationCommandOptionChoice{
+				{
+					Name:  "Leg press1",
+					Value: "Leg press",
+				},
+				{
+					Name:  "Adductor1",
+					Value: "Adductor",
+				},
+			},
 		},
 		{
 			// Type:        discordgo.ApplicationCommandOptionInteger,

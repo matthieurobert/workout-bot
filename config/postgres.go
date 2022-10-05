@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"strconv"
 
 	"github.com/go-pg/pg/v10"
 )
@@ -13,8 +14,8 @@ type Postgres struct {
 
 func (ps *Postgres) connectToDb(env *Env) {
 	ps.Db = pg.Connect(&pg.Options{
-		// Addr:     env.PostgresHost + ":" + string(rune(env.PostgresPort)),
-		Addr:     "postgres:5432",
+		Addr: env.PostgresHost + ":" + strconv.Itoa(env.PostgresPort),
+		// Addr:     "postgres:5432",
 		User:     env.PostgresUser,
 		Password: env.PostgresPassword,
 		Database: env.PostgresDatabase,

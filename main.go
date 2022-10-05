@@ -15,8 +15,8 @@ import (
 
 // Bot parameters
 var (
-	GuildID        = flag.String("guild", "", "Test guild ID. If not passed - bot registers commands globally")
-	BotToken       = flag.String("token", "NDQ2MzExMzY0MjQwMjExOTc5.GoFknN.7bqb1_rmxmPrtuaV5QKmF0p2PVEy8gEQvpmYik", "Bot access token")
+	GuildID = flag.String("guild", "", "Test guild ID. If not passed - bot registers commands globally")
+	// BotToken       = flag.String("token", config.ENV.BotToken, "Bot access token")
 	RemoveCommands = flag.Bool("rmcmd", true, "Remove all commands after shutdowning or not")
 )
 
@@ -26,7 +26,10 @@ func init() { flag.Parse() }
 
 func init() {
 	var err error
-	s, err = discordgo.New("Bot " + *BotToken)
+
+	config.InitConfig()
+
+	s, err = discordgo.New("Bot " + config.ENV.BotToken)
 	if err != nil {
 		log.Fatalf("Invalid bot parameters: %v", err)
 	}
@@ -34,27 +37,11 @@ func init() {
 
 var (
 	commands = []*discordgo.ApplicationCommand{
-		// co.BasicCommand,
-		// co.BasicCommandWithFiles,
-		// co.PermissionOverview,
-		// co.LocalizedCommand,
-		// co.Options,
-		// co.Subcommands,
-		// co.Responses,
-		// co.Followups,
 		co.Exercice,
 		co.Time,
 	}
 
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		// "basic-command":            co.BasicCommandHandler,
-		// "basic-command-with-files": co.BasicCommandWithFilesHandler,
-		// "localized-command":        co.LocalizedCommandHandler,
-		// "options":                  co.OptionsHandler,
-		// "permission-overview":      co.PermissionOverviewHandler,
-		// "subcommands":              co.SubcommandsHandler,
-		// "responses":                co.ResponsesHandler,
-		// "followups":                co.FollowupsHandler,
 		"exercice": co.ExerciceHandler,
 		// "time":     co.TimeHandlers,
 	}
