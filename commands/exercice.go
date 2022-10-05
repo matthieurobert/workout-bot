@@ -44,6 +44,7 @@ func ExerciceHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	var name string
 	var rep int
 	var series []int
+	id := uuid.New()
 
 	options := i.ApplicationCommandData().Options
 
@@ -76,17 +77,24 @@ func ExerciceHandler(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		}
 	}
 
-	exercice := models.Exercice{
-		Id:      uuid.New(),
-		Name:    name,
-		Type:    "rep",
-		Success: true,
-		Properties: models.ExerciceProperties{
-			Rep:    rep,
-			Series: series,
-		},
-		CreatedAt: time.Now(),
+	properties := models.ExerciceProperties{
+		Id:     id,
+		Rep:    rep,
+		Series: series,
 	}
+
+	models.CreateExerciceProperties(&properties)
+
+	exercice := models.Exercice{
+		Id:         id,
+		Name:       name,
+		Type:       "rep",
+		Success:    true,
+		Properties: &properties,
+		CreatedAt:  time.Now(),
+	}
+
+	models.CreateExercice(&exercice)
 
 	exerciceJson, err := json.Marshal(exercice)
 

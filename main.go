@@ -10,12 +10,13 @@ import (
 
 	co "github.com/matthieurobert/workout-bot/commands"
 	"github.com/matthieurobert/workout-bot/config"
+	"github.com/matthieurobert/workout-bot/models"
 )
 
 // Bot parameters
 var (
 	GuildID        = flag.String("guild", "", "Test guild ID. If not passed - bot registers commands globally")
-	BotToken       = flag.String("token", "", "Bot access token")
+	BotToken       = flag.String("token", "NDQ2MzExMzY0MjQwMjExOTc5.GoFknN.7bqb1_rmxmPrtuaV5QKmF0p2PVEy8gEQvpmYik", "Bot access token")
 	RemoveCommands = flag.Bool("rmcmd", true, "Remove all commands after shutdowning or not")
 )
 
@@ -55,7 +56,7 @@ var (
 		// "responses":                co.ResponsesHandler,
 		// "followups":                co.FollowupsHandler,
 		"exercice": co.ExerciceHandler,
-		"time":     co.TimeHandlers,
+		// "time":     co.TimeHandlers,
 	}
 )
 
@@ -69,6 +70,8 @@ func init() {
 
 func main() {
 	config.InitConfig()
+
+	models.CreateSchema(config.POSTGRES.Db)
 
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
